@@ -4,33 +4,36 @@ from google.appengine.ext import ndb
 from app.models.ref import Ref
 
 class RefTestCase(GaeFlaskTestCase):
-    def test_ref(self):
-        profs = Ref(name=u'Professions')
-        profs_k = profs.put()
-        it_profs = Ref(name=u'IT', ancestors=[profs_k])
-        it_profs_k = it_profs.put()
+    def setUp(self):
+        super(RefTestCase, self).setUp()
+        #0 level
+        profs = Ref(name=u'Professions',
+                description=u'Contains grouped professions')
+        self.profs_k = profs.put()
+        #1
+        it = Ref(name=u'IT', code='100E')
+        it.set_parent(profs)
+        self.it_k = it.put()
+        #2
+        web_programmist = Ref(name=u'Web programmist', code='101B',
+                skills=['Python', 'Javascript', 'HTML'])
+        web_programmist.set_parent(it)
+        self.web_programmist_k = web_programmist.put()
+        system_programmist = Ref(name=u'System programmist', code='101B',
+                skills=['C', 'C++', 'GTK'])
+        system_programmist.set_parent(it)
+        self.system_programmist_k = system_programmist.put()
+        #1
+        edu = Ref(name=u'Education', code='200C')
+        edu.set_parent(profs)
+        self.edu_k = edu.put()
 
-        #get root refs
-        self.assertTrue(Ref.query(Ref.level == 0).count() == 1)
-        it_profs_q = Ref.query(Ref.ancestors == profs_k)
-        #get all children of ref
-        self.assertEquals(it_profs_q.count(), 1)
-        #get level
-        self.assertEquals(profs.level, 0)
-        #get parent
-        self.assertEquals(it_profs_q.get().parent, profs_k)
+    def test_get_children(self):
+        p = self.profs_k.get()
+        self.assertEquals(len(p.children), 2)
 
-        ed_profs = Ref(name=u'Education')
-        ed_profs.set_parent(it_profs)
-        ed_profs.put()
-        self.assertEquals(ed_profs.parent, it_profs_k)
+    def test_get_descedants(self):
+        p = self.profs_k.get()
+        self.assertEquals(len(p.get_descedants()), 4)
 
-        #get children
-        self.assertEquals(len(profs.children), 1)
-
-        m_profs = Ref(name=u'Music')
-        m_profs.set_parent(profs)
-        m_profs.put()
-        #get descedants
-        self.assertEquals(len(profs.descedants), 3)
-
+        self.assertEquals(len(p.get_descedants(depth=1)), 2)
