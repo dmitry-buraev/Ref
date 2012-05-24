@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>MetaWorld</title>
+        <link rel="stylesheet" href="/static/js/dtk/dijit/themes/nihilo/nihilo.css">
+        <link rel="stylesheet" href="/static/css/main.css">
+        <script>
+            var dojoConfig = {
+                isDebug: true,
+                async: true,
+                paths: {
+                    'metaworld': '../../metaworld'
+                }
+            }
+        </script>
+        <script type="text/javascript" src="/static/js/dtk/dojo/dojo.js"></script>
+        <script>
+            require(['dojo/ready', 'metaworld'], function(ready, app) {
+                ready(function() {
+                    app.init();
+                });
+            });
+        </script>
+    </head>
+    <body class="nihilo">
+        <div id="app-layout"></div>
+    </body>
+</html>

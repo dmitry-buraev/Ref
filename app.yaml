@@ -1,4 +1,4 @@
-application: 100500jobs
+application: metaworld
 version: 1
 runtime: python27
 api_version: 1
@@ -9,7 +9,7 @@ builtins:
 
 libraries:
 - name: jinja2
-  version: 2.6
+  version: latest
 
 handlers:
 - url: /static
