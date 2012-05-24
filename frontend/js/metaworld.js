@@ -24,6 +24,10 @@ function(BorderContainer, ContentPane, JsonRest, Tree)
             layout.startup();
 
             console.log('app initialized');
+        },
+
+        test: function() {
+            return 'ok';
         }
     };
     return app;

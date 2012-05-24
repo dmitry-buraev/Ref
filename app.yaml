@@ -12,6 +12,10 @@ libraries:
   version: latest
 
 handlers:
+#For D.O.H
+- url: /static/js/dtk/util/doh/runner\.html
+  static_files: static/js/dtk/util/doh/runner.html
+  upload: static/js/dtk/util/doh/runner\.html
 - url: /static
   static_dir: static
 - url: .*
