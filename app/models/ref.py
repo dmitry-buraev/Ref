@@ -3,6 +3,7 @@ from google.appengine.ext import ndb
 class Ref(ndb.Expando):
     name = ndb.StringProperty(required=True)
     ancestors = ndb.KeyProperty('Ref', repeated=True)
+    is_leaf = ndb.BooleanProperty(default=False)
 
     level = ndb.ComputedProperty(lambda self: len(self.ancestors))
     parent = ndb.ComputedProperty(
@@ -10,7 +11,7 @@ class Ref(ndb.Expando):
 
     @property
     def children(self):
-        return self.query(Ref.parent == self.key).fetch()
+        return Ref.query(Ref.parent == self.key).fetch()
 
     def get_descedants(self, depth=None):
         if depth == 0:

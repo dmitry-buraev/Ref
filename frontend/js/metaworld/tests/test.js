@@ -8,7 +8,7 @@ define(["doh/runner", 'metaworld'], function(doh, app){
         },
 
         function testApp() {
-            doh.assertEqual('ok', app.test());
+            doh.is('ok', app.test());
         }
     ]);
 

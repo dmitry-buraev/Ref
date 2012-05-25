@@ -4,4 +4,4 @@ import settings
 app = Flask(__name__)
 app.config.from_object('settings')
 
-import views
+import views.ref

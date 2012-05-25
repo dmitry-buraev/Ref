@@ -16,11 +16,11 @@ class RefTestCase(GaeFlaskTestCase):
         self.it_k = it.put()
         #2
         web_programmist = Ref(name=u'Web programmist', code='101B',
-                skills=['Python', 'Javascript', 'HTML'])
+                skills=['Python', 'Javascript', 'HTML'], is_leaf=True)
         web_programmist.set_parent(it)
         self.web_programmist_k = web_programmist.put()
         system_programmist = Ref(name=u'System programmist', code='101B',
-                skills=['C', 'C++', 'GTK'])
+                skills=['C', 'C++', 'GTK'], is_leaf=True)
         system_programmist.set_parent(it)
         self.system_programmist_k = system_programmist.put()
         #1
