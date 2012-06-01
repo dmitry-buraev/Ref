@@ -1,0 +1,6 @@
+{
+    'name': 'metaworld',
+    'description': 'UI for MetaWorld Project',
+    'version': 1.0,
+    'dojoBuild': 'metaworld.profile.js'
+}

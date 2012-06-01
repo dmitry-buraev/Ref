@@ -2,22 +2,25 @@
     <head>
         <title>MetaWorld</title>
         <link rel="stylesheet" href="/static/js/dtk/dijit/themes/nihilo/nihilo.css">
-        <link rel="stylesheet" href="/static/css/main.css">
+        <link rel="stylesheet" href="/static/js/metaworld/resources/metaworld.css">
         <script>
             var dojoConfig = {
                 isDebug: true,
                 async: true,
-                paths: {
-                    'metaworld': '../../metaworld'
-                }
-            }
+                baseUrl: "/static/js/",
+                tlmSiblingOfDojo: false,
+                packages: [
+                    { name: "dojo", location: "dtk/dojo" },
+                    { name: "dijit", location: "dtk/dijit" },
+                    { name: "dojox", location: "dtk/dojox" },
+                    { name: "metaworld", location: "metaworld" }
+                ]
+            };
         </script>
         <script type="text/javascript" src="/static/js/dtk/dojo/dojo.js"></script>
         <script>
-            require(['dojo/ready', 'metaworld'], function(ready, app) {
-                ready(function() {
-                    app.init();
-                });
+            require(['metaworld', 'dojo/domReady!'], function(app) {
+                app.init();
             });
         </script>
     </head>

@@ -4,6 +4,7 @@ define(
        'dijit/layout/ContentPane',
        'dojo/store/JsonRest',
        'dijit/Tree'
+       //'metaworld/MainBar'
 ],
 
 function(BorderContainer, ContentPane, JsonRest, Tree)
@@ -53,11 +54,23 @@ function(BorderContainer, ContentPane, JsonRest, Tree)
                 'class': 'tree'
             }));
 
-            layout.addChild(new ContentPane({
+            var main = new BorderContainer({
                 region: 'center',
-                content: 'stub',
                 'class': 'main'
+            });
+
+            main.addChild(new ContentPane({
+                region: 'top',
+                content: 'Main bar',
+                'class': 'main-bar'
             }));
+
+            main.addChild(new ContentPane({
+                region: 'center',
+                content: 'Main'
+            }));
+
+            layout.addChild(main);
 
             layout.startup();
 

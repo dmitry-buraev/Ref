@@ -1,4 +1,6 @@
-define(["doh/runner", 'metaworld'], function(doh, app){
+define([
+       "doh/runner", 'metaworld/main'
+], function(doh, app){
 
     doh.register("MyTests", [
         function assertTrueTest(){
