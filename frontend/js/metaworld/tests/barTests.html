@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Bar Tests</title>
+        <script>
+            var dojoConfig = {
+                isDebug: true,
+                async: true,
+                baseUrl: '/static/js',
+                tlmSiblingofDojo: false,
+                packages: [
+                    { name: "dojo", location: "dtk/dojo" },
+                    { name: "dijit", location: "dtk/dijit" },
+                    { name: "dojox", location: "dtk/dojox" },
+                    { name: "metaworld", location: "metaworld" }
+                ]
+            };
+        </script>
+        <script src="../../dtk/dojo/dojo.js"></script>
+        <script>
+            require(['doh', 'metaworld/bar'], function(doh, Bar) {
+                'use strict';
+
+                doh.register('metaworld.tests.bar', [{
+                    name: 'bar',
+                    runTest: function() {
+                        doh.t(true);
+                    }
+                }]);
+
+                doh.runOnLoad();
+            });
+        </script>
+    </head>
+    <body></body>
+</html>
