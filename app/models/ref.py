@@ -3,7 +3,7 @@ from google.appengine.ext import ndb
 class Ref(ndb.Expando):
     name = ndb.StringProperty(required=True)
     ancestors = ndb.KeyProperty('Ref', repeated=True)
-    is_leaf = ndb.BooleanProperty(default=False)
+    is_group = ndb.BooleanProperty(default=False)
 
     level = ndb.ComputedProperty(lambda self: len(self.ancestors))
     parent = ndb.ComputedProperty(

@@ -33,14 +33,14 @@ from google.appengine.ext import ndb
 def to_dict(ref, full=True, depth=0):
     """ Convert object itself and its direct children"""
     depth = depth + 1
-    result = { 'id': ref.key.id(), 'name': ref.name, 'is_leaf': ref.is_leaf }
+    result = { 'id': ref.key.id(), 'name': ref.name, 'is_group': ref.is_group}
     if full:
         for k, v in ref._properties.iteritems():
             if (isinstance(v, ndb.GenericProperty) and
                     not isinstance(v, ndb.ComputedProperty)):
                 result[k] = v._get_user_value(ref)
     if depth < 2:
-        if not ref.is_leaf:
+        if ref.is_group:
             result['children'] = [
                     to_dict(r, False, depth) for r in ref.children]
 

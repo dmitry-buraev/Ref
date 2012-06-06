@@ -1,17 +1,20 @@
 define(
 [
-       'dijit/layout/BorderContainer',
-       'dijit/layout/ContentPane',
-       'dojo/store/JsonRest',
-       'dijit/Tree'
-       //'metaworld/MainBar'
+    'dijit/layout/BorderContainer',
+    'dijit/layout/ContentPane',
+    'dojo/store/JsonRest',
+    'dijit/Tree',
+    'metaworld/bar',
+    'metaworld/SelectedItemPane'
 ],
 
-function(BorderContainer, ContentPane, JsonRest, Tree)
+function(BorderContainer, ContentPane, JsonRest, Tree, Bar, SelectedItemPane)
 
 {
     var app = {
         init: function() {
+            var self = this;
+
             var layout = new BorderContainer({
                 design: 'headline'
             }, 'app-layout');
@@ -25,7 +28,7 @@ function(BorderContainer, ContentPane, JsonRest, Tree)
                 target: '/refs/',
 
                 mayHaveChildren: function(object) {
-                    return object.is_leaf !== true;
+                    return object.is_group === true;
                 },
 
                 getChildren: function(object, onComplete, onError) {
@@ -46,33 +49,42 @@ function(BorderContainer, ContentPane, JsonRest, Tree)
                 }
             });
 
-            layout.addChild(new Tree({
+            var tree = new Tree({
                 region: 'left',
                 model: refStore,
                 showRoot: false,
                 splitter: true,
                 'class': 'tree'
-            }));
+            });
+            layout.addChild(tree);
 
             var main = new BorderContainer({
                 region: 'center',
                 'class': 'main'
             });
 
-            main.addChild(new ContentPane({
+            main.addChild(new Bar({
                 region: 'top',
-                content: 'Main bar',
                 'class': 'main-bar'
             }));
 
-            main.addChild(new ContentPane({
+            var selectedItemPane = this.selectedItem = new SelectedItemPane({
                 region: 'center',
-                content: 'Main'
-            }));
+                store: refStore
+            });
+            main.addChild(selectedItemPane);
 
             layout.addChild(main);
 
             layout.startup();
+
+            tree.on('click', function(clickedItem) {
+                var id = clickedItem.id;
+                console.log(self);
+                self.selectedItem.set('itemId', id);
+            });
+
+            self.selectedItem.set('itemId', 3);
 
             console.log('app initialized');
         },
