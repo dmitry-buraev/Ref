@@ -1,0 +1,17 @@
+html, body { height: 100%; margin: 0; overflow: hidden; padding: 0; }
+
+#app-layout { height: 100%; }
+
+.tree { width: 30% }
+
+.main { }
+
+.main-bar { height: 15%; }
+
+/* SelectedItemPane Widget */
+.selected-item-pane { overflow: auto; }
+.selected-item-pane div.header { background-color: #FFE7AB; }
+.selected-item-pane div.row { padding: 3px; }
+.selected-item-pane div.row label { display: block;}
+
+#props-grid { height: 300px; }
