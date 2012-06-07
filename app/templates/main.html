@@ -1,13 +1,14 @@
 <html>
     <head>
         <title>MetaWorld</title>
-        <link rel="stylesheet" href="/static/js/dtk/dijit/themes/claro/claro.css">
-        <link rel="stylesheet" href="/static/js/metaworld/resources/metaworld.css">
+        <link rel="stylesheet" href="/static/dtk/dijit/themes/claro/claro.css">
+        <link rel="stylesheet" href="/static/dtk/dojox/grid/resources/claroGrid.css">
+        <link rel="stylesheet" href="/static/metaworld/resources/metaworld.css">
         <script>
             var dojoConfig = {
                 isDebug: true,
                 async: true,
-                baseUrl: "/static/js/",
+                baseUrl: "/static/",
                 tlmSiblingOfDojo: false,
                 packages: [
                     { name: "dojo", location: "dtk/dojo" },
@@ -17,7 +18,7 @@
                 ]
             };
         </script>
-        <script type="text/javascript" src="/static/js/dtk/dojo/dojo.js"></script>
+        <script type="text/javascript" src="/static/dtk/dojo/dojo.js"></script>
         <script>
             require(['metaworld', 'dojo/domReady!'], function(app) {
                 app.init();

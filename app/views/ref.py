@@ -31,9 +31,11 @@ app.add_url_rule('/refs/<id>', view_func=ref_view,
 
 from google.appengine.ext import ndb
 def to_dict(ref, full=True, depth=0):
-    """ Convert object itself and its direct children"""
+    """ Convert object itself and its direct children """
     depth = depth + 1
-    result = { 'id': ref.key.id(), 'name': ref.name, 'is_group': ref.is_group}
+    result = { 'id': ref.key.id(), 'name': ref.name,
+            'is_group': ref.is_group, 'level': ref.level,
+            'el_props': ref.el_props }
     if full:
         for k, v in ref._properties.iteritems():
             if (isinstance(v, ndb.GenericProperty) and

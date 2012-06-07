@@ -15,7 +15,9 @@ import views.ref
 ##1
 #profs = Ref(name=u'Professions',
         #description=u'Contains grouped professions',
-        #is_group=True)
+        #is_group=True,
+        #el_props=[{ 'name': 'code', 'type': 'string' },
+                  #{ 'name': 'description', 'type': 'text' }])
 #profs.set_parent(root_ref)
 #profs.put()
 ##2

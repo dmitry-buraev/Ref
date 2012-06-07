@@ -15,7 +15,9 @@ class RefRestTestCase(GaeFlaskTestCase):
         #1
         profs = Ref(name=u'Professions',
                 description=u'Contains grouped professions',
-                is_group=True)
+                is_group=True,
+                el_props=[{ 'name': 'code', 'type': 'string' },
+                          { 'name': 'description', 'type': 'text' }])
         profs.set_parent(root_ref)
         profs.put()
         #2
@@ -43,15 +45,18 @@ class RefRestTestCase(GaeFlaskTestCase):
     def test_to_dict(self):
         from app.views.ref import to_dict
         p = self.it_k.get()
-        print(to_dict(p, full=False))
         self.assertEquals(to_dict(p, full=False), {
             'id': p.key.id(),
             'name': p.name,
+            'level': p.level,
             'is_group': p.is_group,
+            'el_props': p.el_props,
             'children': [ to_dict(self.wp_k.get(), False, 1),
                 to_dict(self.sp_k.get(), False, 1) ]
         })
         self.assertIn('code', to_dict(p))
+
+        p.test = 'test'
 
     def test_get(self):
         with app.test_request_context():

@@ -80,11 +80,8 @@ function(BorderContainer, ContentPane, JsonRest, Tree, Bar, SelectedItemPane)
 
             tree.on('click', function(clickedItem) {
                 var id = clickedItem.id;
-                console.log(self);
                 self.selectedItem.set('itemId', id);
             });
-
-            self.selectedItem.set('itemId', 3);
 
             console.log('app initialized');
         },
