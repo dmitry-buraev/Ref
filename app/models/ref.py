@@ -10,7 +10,7 @@ class Ref(ndb.Expando):
             lambda self: self.ancestors[-1:][0] if self.level > 0 else None)
     #Stores properties for Ref elements.
     #May be overriden by descedants group Refs
-    el_props = ndb.JsonProperty()
+    structure = ndb.JsonProperty()
 
     @property
     def children(self):
@@ -34,3 +34,4 @@ class Ref(ndb.Expando):
             raise TypeError('Parent must be Ref instance or Key of Ref')
         p = parent.get() if isinstance(parent, ndb.Key) else parent
         self.ancestors = p.ancestors[:] + [p.key]
+        self.structure = p.structure #Inherit el structure

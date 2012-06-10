@@ -16,10 +16,10 @@ class RefRestTestCase(GaeFlaskTestCase):
         profs = Ref(name=u'Professions',
                 description=u'Contains grouped professions',
                 is_group=True,
-                el_props=[{ 'name': 'code', 'type': 'string' },
+                structure=[{ 'name': 'code', 'type': 'string' },
                           { 'name': 'description', 'type': 'text' }])
         profs.set_parent(root_ref)
-        profs.put()
+        self.profs_k = profs.put()
         #2
         it = Ref(name=u'IT', code='100E', is_group=True)
         it.set_parent(profs)
@@ -50,13 +50,16 @@ class RefRestTestCase(GaeFlaskTestCase):
             'name': p.name,
             'level': p.level,
             'is_group': p.is_group,
-            'el_props': p.el_props,
+            'structure': p.structure,
             'children': [ to_dict(self.wp_k.get(), False, 1),
                 to_dict(self.sp_k.get(), False, 1) ]
         })
         self.assertIn('code', to_dict(p))
 
-        p.test = 'test'
+    def test_structure_inheritance(self):
+        profs = self.profs_k.get()
+        it_profs = self.it_k.get()
+        self.assertEquals(profs.structure, it_profs.structure)
 
     def test_get(self):
         with app.test_request_context():

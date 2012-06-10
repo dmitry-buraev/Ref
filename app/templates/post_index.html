@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>Post Index Ref Update</title>
+        <link rel="stylesheet" href="/static/dtk/dijit/themes/claro/claro.css">
+        <!--<link rel="stylesheet" href="/static/metaworld/resources/metaworld.css">-->
+        <script>
+            var dojoConfig = {
+                isDebug: true,
+                async: true,
+                baseUrl: "/static/",
+                tlmSiblingOfDojo: false,
+                packages: [
+                    { name: "dojo", location: "dtk/dojo" },
+                    { name: "dijit", location: "dtk/dijit" },
+                    { name: "dojox", location: "dtk/dojox" },
+                    { name: "metaworld", location: "metaworld" }
+                ]
+            };
+        </script>
+        <script type="text/javascript" src="/static/dtk/dojo/dojo.js"></script>
+        <script>
+            require(['dojo/domReady!'], function(app) {
+            });
+        </script>
+    </head>
+    <body class="claro">
+        <ul>
+        {% for rec in records %}
+            <li>
+            <ul>
+            {% for p in rec %}
+                <li>
+                {{ p }} - {{ rec[p] }}
+                </li>
+            {% endfor %}
+            </ul>
+            </li>
+        {% endfor %}
+        </ul>
+    </body>
+</html>
